@@ -1,0 +1,26 @@
+// ServicePro — Prisma schema
+// Learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Lead captures from the quote form.
+// In a GHL deployment, leads sync to GHL contacts + opportunities instead.
+model Lead {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phone       String
+  serviceType String
+  urgency     String
+  message     String?
+  industry    String
+  business    String
+  createdAt   DateTime @default(now())
+}
